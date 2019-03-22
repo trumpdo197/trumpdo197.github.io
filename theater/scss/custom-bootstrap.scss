@@ -1,0 +1,13 @@
+@import "bootstrap/functions";
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+
+$grid-breakpoints: (
+	"sm": 480px,
+);
+
+$theme-colors: (
+	"primary": #fd6500,
+);
+
+@import "bootstrap/bootstrap";

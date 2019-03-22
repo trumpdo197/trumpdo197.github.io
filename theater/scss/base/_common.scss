@@ -1,0 +1,245 @@
+@import "variables";
+@import "mixins";
+
+body, html {
+    height: 100%;
+    margin: 0;
+    font: 400 15px/1.0 $font-primary, serif;
+    color: $grey;
+    font-size: $font-size-base;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+a {
+	color: inherit;
+}
+
+a.link {
+	@extend %transition;
+	position: relative;
+
+	&:before {
+		@extend %transition;
+		content: "";
+		position: absolute;
+		top: 100%;
+		margin-top: 5px;
+		width: 100%;
+		height: 1px;
+		transform: scaleX(0);
+		background: $color-primary;
+	}
+	&:hover, &--active {
+		text-decoration: none;
+		color: $color-primary;
+		&:before {
+			transform: scaleX(1);
+		}
+	}
+		
+}
+
+.btn {
+	&--rounded {
+		border-radius: 50px;
+	}
+}
+
+.btn-primary {
+	&--inverse {
+		background-color: transparent;
+		color: $color-primary;
+		border: 2px solid $btn-border-color-grey;
+		&:hover {
+			border: 2px solid transparent;
+			color: $white;
+			background-color: $color-primary;
+		}
+	}
+}
+
+.social-button {
+	@extend %transition;
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	color: $color-primary;
+	border: 2px solid $btn-border-color-grey;
+	text-align: center;
+	border-radius: 50%;
+	margin-right: 10px;
+	font-size: 1.2em;
+
+	&:hover {
+		background-color: $color-primary;
+		color: $white;
+		border-color: $color-primary;
+	}
+
+	&:last-child {
+		margin-right: 0;
+	}
+
+	@include responsive(md) {
+		width: 50px;
+		height: 50px;
+		line-height: 50px;
+	}
+}
+
+.milestone {
+    font-size: 13px;
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 30px;
+
+    &__number {
+        @extend %inline-middle;
+        @extend %font-secondary;
+        font-size: 2.125em;
+        font-weight: 700;
+        color: $black;
+        margin-top: -10px;
+        width: 25%;
+        text-align: right;
+    }
+
+    &__label {
+        @extend %inline-middle;
+        text-align: left;
+        padding-left: 50px;
+        position: relative;
+        width: 75%;
+        font-size: 1em;
+        font-style: italic;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        line-height: 1.5;
+
+        &:before {
+            @extend %middle-translate;
+            content: "";
+            left: 24px;
+            width: 4px;
+            height: 4px;
+            background-color: $color-primary;
+            border-radius: 50%;
+        }
+    }
+
+    @include responsive(md) {
+        font-size: 16px;
+        margin-bottom: 35px;
+
+        &__year {
+            margin-top: -5px;
+        }
+    }
+}
+
+.container {
+	@include responsive(xxl) {
+		max-width: 1200px;
+	}
+}
+
+/* ==========================================================================
+   MISCS
+   ========================================================================== */
+
+	.ani-word {
+		display: inline-block;
+		letter-spacing: 0;
+		&:after {
+			content: "\00a0";
+		}
+	}
+
+	.ani-letter {
+		display: inline-block;
+	}
+
+	.inview-animate {
+		visibility: hidden;
+	}
+
+/* ==========================================================================
+   ROW GUTTERS
+   ========================================================================== */
+	
+	@each $size in $gutter-sizes {
+		.gutter-#{$size} {
+			@include make-row-gutter-class($size);
+		}
+	}
+
+
+
+/* ==========================================================================
+   Common Extendable Classes
+   ========================================================================== */
+
+	%transition {
+		transition: $default-transition-time all ease;
+	}
+
+	%overlay {
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	%inline-middle {
+		display: inline-block;
+		vertical-align: middle;
+		margin-right: -0.25em;
+	}
+
+	%empty-btn {
+		background: none;
+		outline: none;
+		border: none;
+		cursor: pointer;
+	}
+
+	%middle-translate {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+
+	%center-translate {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
+	%center-middle-translate {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translateX(-50%) translateY(-50%);
+	}
+
+	%pseudo-vertical-middle {
+	  	display: inline-block;
+	  	vertical-align: middle;
+	  	&:before {
+	  		content: "";
+			display: inline-block;
+			height: 100%;
+			vertical-align: middle;
+			width: 0;
+	  	}
+	}
+
+	%font-secondary {
+		font-family: "Playfair Display", sans-serif;
+	}

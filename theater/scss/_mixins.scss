@@ -1,0 +1,51 @@
+@mixin transition($time: 0.2s, $what: all, $how: ease-in-out) {
+    -webkit-transition: $what $time $how;
+    -moz-transition:    $what $time $how;
+    -ms-transition:     $what $time $how;
+    -o-transition:      $what $time $how;
+    transition:         $what $time $how;
+}
+
+@mixin responsive($point) {
+   	@if $point == sm {
+     	@media (min-width: 480px) { @content ; }
+  	}
+   	@else if $point == md {
+     	@media (min-width: 768px) { @content ; }
+  	}
+    @else if $point == lg {
+     	@media (min-width: 992px) { @content ; }
+  	}
+   	@else if $point == xl {
+     	@media (min-width: 1200px)  { @content ; }
+  	}
+    @else if $point == xxl {
+      @media (min-width: 1920px) { @content ; }
+    }
+}
+
+@mixin make-row-gutter-class($gutter-size) {
+
+    margin-left: -#{($gutter-size / 2)}px;
+    margin-right: -#{($gutter-size / 2)}px;
+    > [class^="col-"], > [class^=" col-"] {
+        padding-left: #{($gutter-size / 2)}px;
+        padding-right: #{($gutter-size / 2)}px;
+    }
+
+}
+
+@mixin placeholder(){
+    &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+        @content;
+    }
+    &::-moz-placeholder { /* Firefox 19+ */
+        @content;
+    }
+    &:-ms-input-placeholder { /* IE 10+ */
+        @content;
+    }
+    &:-moz-placeholder { /* Firefox 18- */
+        @content;
+    }
+}

@@ -1,0 +1,39 @@
+.video-js .vjs-big-play-button {
+	&:before {
+		@extend %font-secondary;
+		content: "MY";
+		left: -30px;
+		transform: translateX(-100%);
+	}
+
+	&:after {
+		@extend %font-secondary;
+		content: "STORY";
+		right: -30px;
+		transform: translateX(100%);
+	}
+
+	&:before, &:after {
+		position: absolute;
+		top: 0;
+		font-style: italic;
+		font-size: 56px;
+	}
+
+	&:focus, &:visited, &:active {
+		border: none;
+		outline: none;
+	}
+	
+	background: none;
+    font-size: 7.5em;
+    line-height: 2em;
+    height: 2em;
+    width: 2em;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    z-index: 15;
+}
