@@ -16,10 +16,9 @@
     <div id="slider" class="slider home-intro">
         
         <div data-slide="image_container" class="slider__image home-intro__image">
-            <img src="img/intro2.jpg" alt="">
-            <img src="img/intro.jpg" alt="">
+            <img src="img/intro2.jpg" srcset="img/intro2-mobile.jpg 768w, img/intro2.jpg 1920w" alt="">
+            <img src="img/intro.jpg" srcset="img/intro-mobile.jpg 768w, img/intro.jpg 1920w" alt="">
         </div>
-        
 
         <div class="slider__nav">
             <div class="container home-intro__big-container">
@@ -574,39 +573,27 @@
             return (v1+cos(u_time+PI / 8.0)+v2+v3+v4+v5+v6+v7+v8)/8.0;
         }
 
-        vec2 ripple(vec2 st){
-            vec2 p = -1.0 + 2.0 * st;
-            float len = length(p);
-            vec2 uv = st + ( p / len ) * cos( len * 6.0 - u_time * 4.0) *0.03;
-
-            return uv;
-        }
-
         void main( void ) {
             
-            float seed  = 14.0;    
+            float seed  = 4.0;    
             float t     = 0.01 * u_time;
-            float reverse_slide_progress = 1.0 - slide_progress;
 
-            vec2 uv = ( gl_FragCoord.xy / u_resolution.xy );
+            vec2 uv = gl_FragCoord.xy / u_resolution.xy;
 
             uv = uv + avg(q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W)  );
             uv = uv + avg(q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W)  );
-            uv = uv + avg(q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W)  );
-            uv = uv + avg(q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W)  );
+            // uv = uv + avg(q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W)  );
+            // uv = uv + avg(q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W)  );
 
-            float rand1 = avg(q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W) ) * reverse_slide_progress;
-            float rand2 = avg(q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W) ) * reverse_slide_progress;
+            float rand1 = avg(q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W) ) * (1.0 - slide_progress);
+            float rand2 = avg(q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W),q(D, A, uv, W) ) * (1.0 - slide_progress);
 
             vec4 texel1, texel2;
             
             texel1 = texture2D( texture1, vUV );
-            texel2 = texture2D( texture2, vUV + (vec2(rand1, rand2) * sign(direction_sign)) );
-
-            vec2 ripple = ripple(uv);
+            texel2 = texture2D( texture2, vUV + (vec2(rand1, rand2) * direction_sign) );
 
             vec4 color = mix(texel1, texel2, slide_progress);
-            // color   = mix(color, ripple, 1.0);
 
             gl_FragColor = color;
 
