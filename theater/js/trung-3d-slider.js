@@ -48,7 +48,7 @@ function Slider(container, configs){
 
     this._default_configs       = {
         debug: false,
-        autoplay: true,
+        autoplay: false,
         autoplayTimeout: 7000
     }
 
@@ -63,15 +63,11 @@ Slider.prototype._mergeOptions = function( obj1, obj2 ){
 }
 
 Slider.prototype._init = async function(configs){
-    var default_configs = this._getProp('default_configs');
-    var merged_configs  = this._mergeOptions(configs, default_configs);
+    var default_configs = this._default_configs;
+    var merged_configs  = this._mergeOptions(default_configs, configs);
 
-    for (var attrname in configs) {
-        default_configs[attrname] = configs[attrname];
-    }
-
-    this._setProp('configs', merged_configs);
-    this._setProp('slides', this._getProp('container').find('[data-slide="slide"]'));
+    this._configs = merged_configs;
+    this._slides = this._container.find('[data-slide="slide"]');
     
     await this._initTextures();
     this._initThreeScene();
@@ -90,7 +86,7 @@ Slider.prototype._init = async function(configs){
  */
 Slider.prototype._getRatioFixingFactor = function( texture ) {
 
-    var renderer    = this._getProp('renderer');
+    var renderer    = this._renderer;
     var w           = window.innerWidth; // Current dom element/image width
     var h           = window.innerHeight;
 
@@ -110,7 +106,6 @@ Slider.prototype._getRatioFixingFactor = function( texture ) {
     else {
         return [expected_img_w / w, 1.0];
     }
-         
 };
 
 Slider.prototype._initTextures = function() {
@@ -118,7 +113,7 @@ Slider.prototype._initTextures = function() {
     var promise_arr     = [];
     var texture_urls    = [];
 
-    var image_DOMs = this._getProp('container').find( '[data-slide="image_container"] img' );
+    var image_DOMs = this._container.find( '[data-slide="image_container"] img' );
     
     image_DOMs.each(function(index, item){
         texture_urls.push(item.currentSrc);
@@ -148,7 +143,7 @@ Slider.prototype._initTextures = function() {
             var texture_url = "img/blank-image-layer.png";
 
             loader.load( texture_url, function(loadedTexture){
-                that._setProp('blank_texture', loadedTexture);
+                that._blank_texture = loadedTexture;
                 resolve();
             });
         }) 
@@ -161,15 +156,15 @@ Slider.prototype._initTextures = function() {
             textures.push(texture_map[key]);
         }
 
-        that._setProp('textures', textures);
+        that._textures = textures;
 
         that._calcAllTexturesRatioFixingFactor();
     })
 };
 
 Slider.prototype._initPaginations = function () {
-    var pagination    = this._getProp('container').find('[data-slide="pagination"]');
-    var texture_urls            = this._getProp('textures');
+    var pagination    = this._container.find('[data-slide="pagination"]');
+    var texture_urls            = this._textures;
     var that                    = this;
 
     for (let i = 0, texture_count = texture_urls.length; i < texture_count; i++) {
@@ -187,29 +182,29 @@ Slider.prototype._initPaginations = function () {
         pagination.append(pagination_bullet);
     }
 
-    this._setProp('pagination', pagination);
+    this._pagination = pagination;
 }
 
 Slider.prototype._initAutoplay = function() {
-    var configs = this._getProp('configs');
+    var configs = this._configs;
 
     if ( configs.autoplay == true ) {
         var interval = setInterval(function(){
-            if (this._getProp('need_rendering') == false) {
+            if (this._need_rendering == false) {
                 return;
             }
             
             this._navigateSlide('next');
         }.bind(this), configs.autoplayTimeout);
 
-        this._setProp('autoplay_interval', interval);
+        this._autoplay_interval = interval;
     }  
 };
 
 Slider.prototype._initThreeScene = function() {
-    var image_container = this._getProp('container').find( '[data-slide="image_container"]' )[0];
-    var textures        = this._getProp('textures');
-    var data            = this._getProp('data');
+    var image_container = this._container.find( '[data-slide="image_container"]' )[0];
+    var textures        = this._textures;
+    var data            = this._data;
 
     // Camera
     var camera = new THREE.Camera()
@@ -249,8 +244,8 @@ Slider.prototype._initThreeScene = function() {
     // Material
     var material = new THREE.ShaderMaterial({
         // wireframe: true,
-        precision: 'lowp', // For performance purposes
         uniforms: uniforms,
+        resolution: { value: new THREE.Vector2() },
         vertexShader: document.getElementById( 'vertexShader' ).textContent,
         fragmentShader: document.getElementById( 'fragmentShader' ).textContent
     });
@@ -260,18 +255,20 @@ Slider.prototype._initThreeScene = function() {
     scene.add( mesh );
 
     // Renderer
-    var renderer = new THREE.WebGLRenderer();
-    renderer.setPixelRatio( window.devicePixelRatio );
+    var renderer = new THREE.WebGLRenderer({
+        precision: 'highp',
+        antialias: false
+    });
 
     image_container.appendChild( renderer.domElement );
 
-    this._setProp('camera', camera);
-    this._setProp('scene', scene);
-    this._setProp('geometry', geometry);
-    this._setProp('uniforms', uniforms);
-    this._setProp('material', material);
-    this._setProp('mesh', mesh);
-    this._setProp('renderer', renderer);
+    this._camera = camera;
+    this._scene = scene;
+    this._geometry = geometry;
+    this._uniforms = uniforms;
+    this._material = material;
+    this._mesh = mesh;
+    this._renderer = renderer;
 }
 
 Slider.prototype._getCurrentTextureIndex = function(){
@@ -291,7 +288,7 @@ Slider.prototype._getNextTexture = function(){
 
 Slider.prototype._getNextTextureIndex = function(direction = "next"){
     var current_texture_index   = this._getCurrentTextureIndex();
-    var textures                = this._getProp('textures');
+    var textures                = this._textures;
 
     if (direction == "next") {
         if (current_texture_index == textures.length - 1) {
@@ -311,14 +308,14 @@ Slider.prototype._getNextTextureIndex = function(direction = "next"){
 }
 
 Slider.prototype._updateTextures = function() {
-    var uniforms = this._getProp('uniforms');
-    var material = this._getProp('material');
-    var textures = this._getProp('textures');
-    var current_texture_index   = this._getProp('current_texture_index');
-    var next_texture_index      = this._getProp('next_texture_index');
+    var uniforms = this._uniforms;
+    var material = this._material;
+    var textures = this._textures;
+    var current_texture_index   = this._current_texture_index;
+    var next_texture_index      = this._next_texture_index;
 
     if (current_texture_index === -1) {
-        uniforms.texture1.value = this._getProp('blank_texture');
+        uniforms.texture1.value = this._blank_texture;
     }
     else {
         uniforms.texture1.value = textures[current_texture_index];
@@ -330,14 +327,18 @@ Slider.prototype._updateTextures = function() {
 };
 
 Slider.prototype._updatePagination = function(next_texture_index) {
-    var pagination = $(this._getProp('pagination'));
+    var pagination = $(this._pagination);
 
     pagination.find('a').removeClass('slider__pagination--active');
     pagination.find('[slide-id=' + next_texture_index + ']').addClass('slider__pagination--active');
 }
 
 Slider.prototype._resetAutoplayInterval = function(){
-    var interval = this._getProp('autoplay_interval');
+    if (this._configs.autoplay !== true) {
+        return;
+    }
+
+    var interval = this._autoplay_interval;
     clearInterval(interval);
     this._initAutoplay();
 };
@@ -350,24 +351,24 @@ Slider.prototype._navigateSlide = function(direction = "next"){
 }
 
 Slider.prototype._jumpSlide = function(next_texture_index) {
-    var current_texture_index = this._getProp('current_texture_index');
+    var current_texture_index = this._current_texture_index;
 
     if (current_texture_index == next_texture_index) return;
 
     var that            = this;
-    var data            = this._getProp('data');
-    var container       = this._getProp('container');
-    var is_animating    = this._getProp('is_animating');
-    var slides          = this._getProp('slides');
-    var textures        = this._getProp('textures');
-    var is_animating    = this._getProp('is_animating');
+    var data            = this._data;
+    var container       = this._container;
+    var is_animating    = this._is_animating;
+    var slides          = this._slides;
+    var textures        = this._textures;
+    var is_animating    = this._is_animating;
     
     var direction       = this._getDirection(next_texture_index);
 
     if (is_animating === true) return;
 
-    this._setProp('is_animating', true);
-    this._setProp('next_texture_index', next_texture_index);
+    this._is_animating = true;
+    this._next_texture_index = next_texture_index;
 
     this._updateTextures();
     this._updatePagination( next_texture_index );
@@ -376,13 +377,13 @@ Slider.prototype._jumpSlide = function(next_texture_index) {
     var tl = new TimelineMax({
         onComplete: function() {
             
-            that._setProp('is_animating', false);
+            that._is_animating = false;
 
             if (direction == "init") {
                 container.addClass('slider--initted');
             }
             
-            that._setProp('current_texture_index', next_texture_index);
+            that._current_texture_index = next_texture_index;
             
             // Reset the progress when finishing animating, otherwise it'll cause wrong slide image bug.
             data.slide_progress = 0;
@@ -414,7 +415,7 @@ Slider.prototype._jumpSlide = function(next_texture_index) {
 }
 
 Slider.prototype._getDirection = function(next_texture_index) {
-    var current_texture_index = this._getProp('current_texture_index');
+    var current_texture_index = this._current_texture_index;
 
     if (current_texture_index === -1) {
         return "init";
@@ -430,39 +431,35 @@ Slider.prototype._getDirection = function(next_texture_index) {
 };
 
 Slider.prototype._render = function() {
-    var need_rendering = this._getProp('need_rendering');
- 
-    if (need_rendering === false) return;
 
-    var renderer    = this._getProp('renderer');
-    var uniforms    = this._getProp('uniforms');
-    var textures    = this._getProp('textures');
-    var data        = this._getProp('data');
-    var scene       = this._getProp('scene');
-    var camera      = this._getProp('camera');
+    if (this._configs.debug === true) {
+        console.log("Is rendering: " + this._need_rendering);
+    } 
+
+    if (this._need_rendering === false) return;
 
     var current_texture = this._getCurrentTexture();
     var next_texture    = this._getNextTexture();
 
-    uniforms.u_time.value                   += 0.03;
-    uniforms.slide_progress.value           = data.slide_progress;
-    uniforms.direction_sign.value           = data.direction_sign;
+    this._uniforms.u_time.value                   += 0.03;
+    this._uniforms.slide_progress.value           = this._data.slide_progress;
+    this._uniforms.direction_sign.value           = this._data.direction_sign;
 
     // console.log(current_texture);
 
-    uniforms.ratio_fixing_factor.value.x    = current_texture.ratio_fixing_factor[0];
-    uniforms.ratio_fixing_factor.value.y    = current_texture.ratio_fixing_factor[1];
+    this._uniforms.ratio_fixing_factor.value.x    = current_texture.ratio_fixing_factor[0];
+    this._uniforms.ratio_fixing_factor.value.y    = current_texture.ratio_fixing_factor[1];
 
-    uniforms.next_ratio_fixing_factor.value.x    = next_texture.ratio_fixing_factor[0];
-    uniforms.next_ratio_fixing_factor.value.y    = next_texture.ratio_fixing_factor[1];
+    this._uniforms.next_ratio_fixing_factor.value.x    = next_texture.ratio_fixing_factor[0];
+    this._uniforms.next_ratio_fixing_factor.value.y    = next_texture.ratio_fixing_factor[1];
 
-    renderer.render( scene, camera );
+    this._renderer.render( this._scene, this._camera );
 }
 
 Slider.prototype._animate = function() {
     var that = this;
-    var need_rendering  = that._getProp('need_rendering');
-    var debug           = that._getProp('configs').debug;
+    var need_rendering  = that._need_rendering;
+    var debug           = that._configs.debug;
 
     if (debug === true) {
         console.log(need_rendering);
@@ -479,14 +476,21 @@ Slider.prototype._animate = function() {
 }
 
 Slider.prototype._onWindowResize = function( event ) {
-    var renderer = this._getProp('renderer');
-    var uniforms = this._getProp('uniforms');
-    var data     = this._getProp('data');
+    var renderer = this._renderer;
+    var uniforms = this._uniforms;
+    var data     = this._data;
 
     renderer.setSize( window.innerWidth, window.innerHeight );
 
     uniforms.u_resolution.value.x = renderer.domElement.width;
     uniforms.u_resolution.value.y = renderer.domElement.height;
+
+    if (window.innerWidth < 768) {
+        renderer.setPixelRatio( 0.5 );
+    }
+    else {
+        renderer.setPixelRatio( window.devicePixelRatio );
+    }
 
     this._calcAllTexturesRatioFixingFactor();
 };
@@ -514,8 +518,8 @@ Slider.prototype._onWindowScrollWithInit = function() {
 }
 
 Slider.prototype._calcAllTexturesRatioFixingFactor = function(){
-    var textures        = this._getProp('textures');
-    var blank_texture   = this._getProp('blank_texture');
+    var textures        = this._textures;
+    var blank_texture   = this._blank_texture;
 
     for (var i = 0; i < textures.length; i++) {
         var texture = textures[i];
@@ -523,48 +527,29 @@ Slider.prototype._calcAllTexturesRatioFixingFactor = function(){
     }
 
     blank_texture.ratio_fixing_factor = textures[0].ratio_fixing_factor;
-
 }
 
 /* ==========================================================================
    User's helpful functions
    ========================================================================== */
 
-    Slider.prototype._getProp = function(propName){
-        return this['_' + propName];
-    }
-
-    Slider.prototype._setProp = function(propName, value){
-        this['_' + propName] = value;
-    }
-
-    Slider.prototype.enableRendering = function(){
-        this._needRendering = true;
-    }
-
-    Slider.prototype.disableRendering = function(){
-        this._needRendering = false;
-    }
-
     Slider.prototype.pause = function(){
-        this._setProp('need_rendering', false);
+        this._need_rendering = false;
     }
 
     Slider.prototype.resume = function(){
-        this._setProp('need_rendering', true);
+        this._need_rendering = true;
     }
 
     Slider.prototype.init = function(){
-        this._setProp('is_initted', true);
-
-        setTimeout(function(){
-            this._animate();
-            this._navigateSlide("init");
-        }.bind(this), 350) // Let CPU/GPU has time to rest
+        this._is_initted = true;
+        this._animate();
+        this._navigateSlide("init");
+        
     }
 
     Slider.prototype.is_initted = function(){
-        return this._getProp('is_initted');
+        return this._is_initted;
     }
 
     // Slider.prototype.navigateSlide = Slider.prototype._navigateSlide;

@@ -123,8 +123,7 @@
         var openMenuButton  = $('#open-menu');
         var closeMenuButton   = $('#close-menu');
 
-        var openMenu = function(event) {
-            event.preventDefault();
+        var openMenu = function() {
 
             var tl = new TimelineMax();
 
@@ -146,10 +145,14 @@
             }, null, null, "-=0.2")
         }
 
-        var closeMenu = function(event) {
-            event.preventDefault();
+        var closeMenu = function(callback) {
+            var tl = new TimelineMax({
+                onComplete: function(){
+                    if (typeof callback != 'function') return;
 
-            var tl = new TimelineMax();
+                    callback();
+                }
+            });
 
             tl.call(function(){
                 closeMenuButton.removeClass('close-svg--animate');
@@ -167,8 +170,15 @@
 
         mobileMenu.removeClass('mobile-menu--hidden');
         
-        openMenuButton.click(openMenu);
-        closeMenuButton.click(closeMenu);
+        openMenuButton.click(function(){
+            window.slider.pause();
+            openMenu();
+        });
+        closeMenuButton.click(function(){
+            closeMenu( function(){
+                window.slider.resume();
+            } );
+        });
 
     }()
 
@@ -270,8 +280,7 @@
                 y: 0,
                 opacity: 1
             })
-        });
-        
+        }); 
     }()
 
     +function initOnScrollHomeVideo(){
@@ -325,18 +334,13 @@
                 opacity: 1
             })
         })
-
     }()
 
     +function initHomeSlider(){
 
-        var slider = new Slider($('#slider'), {
-            // texture_urls: [
-            //     "img/intro.jpg",
-            //     "img/intro2.jpg",
-            //     "img/film.jpg"
-            // ],
-            debug: true
+        window.slider = new Slider($('#slider'), {
+            debug: false,
+            autoplay: true,
         });
 
         $('#slider-next').click(function(event) {
@@ -346,5 +350,4 @@
         $('#slider-prev').click(function(event) {
             slider.navigateSlide("prev");
         });
-
     }()
