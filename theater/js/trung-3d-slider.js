@@ -486,7 +486,7 @@ Slider.prototype._onWindowResize = function( event ) {
     uniforms.u_resolution.value.y = renderer.domElement.height;
 
     if (window.innerWidth < 768) {
-        renderer.setPixelRatio( 0.5 );
+        renderer.setPixelRatio( 0.7 );
     }
     else {
         renderer.setPixelRatio( window.devicePixelRatio );
