@@ -62,14 +62,17 @@ Slider.prototype._mergeOptions = function( obj1, obj2 ){
     return obj3;
 }
 
-Slider.prototype._init = async function(configs){
+Slider.prototype._init = function(configs){
     var default_configs = this._default_configs;
     var merged_configs  = this._mergeOptions(default_configs, configs);
 
     this._configs = merged_configs;
     this._slides = this._container.find('[data-slide="slide"]');
     
-    await this._initTextures();
+    this._initTextures();
+}
+
+Slider.prototype._initStep2 = function(){
     this._initThreeScene();
     this._initPaginations();
     this._initAutoplay();
@@ -149,7 +152,7 @@ Slider.prototype._initTextures = function() {
         }) 
     );
 
-    return Promise.all(promise_arr).then(function(){
+    Promise.all(promise_arr).then(function(){
         var textures = [];
 
         for (var key in texture_map) {
@@ -159,6 +162,7 @@ Slider.prototype._initTextures = function() {
         that._textures = textures;
 
         that._calcAllTexturesRatioFixingFactor();
+        that._initStep2();
     })
 };
 
