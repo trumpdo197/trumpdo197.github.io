@@ -1,121 +1,127 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Theatre??</title>
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,800" rel="stylesheet">
-    <link rel="stylesheet" href="css/video-js.css" rel="stylesheet">
+    <link rel="preload" href="img/preloader.svg" as="image"> 
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/video-js.css">
     <link rel="stylesheet" href="css/custom-bootstrap.css">
     <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="css/font-awesome.css">
     <link rel="stylesheet" href="css/app.css">
 </head>
-<body>
+<body id="home" class="overflow-hidden">
 
-    <div id="slider" class="slider home-intro">
+    <div class="preloader">
+        <div class="preloader__inner">
+            <div class="preloader__image"></div>   
+            <div class="preloader__text">
+                Circle Film Studio
+            </div>
+        </div>    
+    </div>
+
+    <div id="slider" class="slider app-home-intro">
         
-        <div data-slide="image_container" class="slider__image home-intro__image">
-            <img src="img/intro2.jpg" srcset="img/intro2-mobile.jpg 768w, img/intro2.jpg 1920w" alt="">
-            <img src="img/intro.jpg" srcset="img/intro-mobile.jpg 768w, img/intro.jpg 1920w" alt="">
+        <div data-slide="image_container" class="slider__image app-home-intro__image">
+            <img src="img/intro2.jpg" alt="Intro2" srcset="img/intro2-mobile.jpg 768w, img/intro2.jpg 1920w" sizes="(min-width: 768px) 1920px" >
+            <img src="img/intro.jpg" alt="Intro" srcset="img/intro-mobile.jpg 768w, img/intro.jpg 1920w" sizes="(min-width: 768px) 1920px">
         </div>
 
         <div class="slider__nav">
-            <div class="container home-intro__big-container">
-                
+            <div class="container container--big">
                 <div class="slider__nav-content">
-     
                     <div class="slider__nav-text">
                         Featured Projects
                         <div class="slider__nav-line"></div>
                     </div>
 
                     <div data-slide="pagination" class="slider__paginations"></div>
-                
                 </div>
-
             </div>
         </div>
 
         <div data-slide="slide" class="slider__item">
-            <div class="home-intro__item home-intro__item--type-2">            
-                <div class="home-intro__text">
+            <div class="app-home-intro__item app-home-intro__item--type-2">
+                <div class="app-home-intro__text">
                     <div class="container">
-                        
-                        <h3 class="home-intro__first-heading">Actor / model</h3>
-                        <h4 class="home-intro__second-heading">Cornelia <br> Lewis</h4>
-                        <button class="home-intro__contact btn btn-primary btn--rounded">Contact Me</button>
-                    
+                        <h3 class="app-home-intro__first-heading">Actor &nbsp;/ model</h3>
+                        <h4 class="app-home-intro__second-heading">Cornelia <br> Lewis</h4>
+                        <button class="app-home-intro__contact btn btn-primary btn--rounded">Contact Me</button>
                     </div>
                 </div>
 
-                <div class="home-intro__awards">
-                    <div class="container home-intro__big-container">
-                        <img src="img/award-1.png" alt="award-1" class="home-intro__award">
-                        <img src="img/award-2.png" alt="award-2" class="home-intro__award">
-                        <img src="img/award-3.png" alt="award-3" class="home-intro__award">
+                <div class="app-home-intro__awards">
+                    <div class="container container--big">
+                        <img src="img/award-1.png" alt="Award 1" class="app-home-intro__award">
+                        <img src="img/award-2.png" alt="Award 2" class="app-home-intro__award">
+                        <img src="img/award-3.png" alt="Award 3" class="app-home-intro__award">
                     </div>
                 </div>
             </div>
         </div>
 
         <div data-slide="slide" class="slider__item">
-            <div class="home-intro__item">            
-                <div class="home-intro__text">
+            <div class="app-home-intro__item">            
+                <div class="app-home-intro__text">
                     <div class="container">
                         
-                        <h3 class="home-intro__first-heading">Actor / model</h3>
-                        <h4 class="home-intro__second-heading">Cornelia Lewis</h4>
-                        <button class="home-intro__contact btn btn-primary btn--rounded">Contact Me</button>
+                        <h3 class="app-home-intro__first-heading">Actor / model</h3>
+                        <h4 class="app-home-intro__second-heading">Cornelia Lewis</h4>
+                        <button class="app-home-intro__contact btn btn-primary btn--rounded">Contact Me</button>
                     
                     </div>
                 </div>
 
-                <div class="home-intro__awards">
-                    <div class="container home-intro__big-container">
-                        <img src="img/award-1.png" alt="award-1" class="home-intro__award">
-                        <img src="img/award-2.png" alt="award-2" class="home-intro__award">
-                        <img src="img/award-3.png" alt="award-3" class="home-intro__award">
+                <div class="app-home-intro__awards">
+                    <div class="container container--big">
+                        <img src="img/award-1.png" alt="Award 1"  class="app-home-intro__award">
+                        <img src="img/award-2.png" alt="Award 2"  class="app-home-intro__award">
+                        <img src="img/award-3.png" alt="Award 3"  class="app-home-intro__award">
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 
-    <header id="header" class="header">
+    <header id="header" class="app-header">
         <div class="container">
 
-            <div class="main-menu">
-                
+            <div class="app-main-menu">
                 <div class="row no-gutters">
                     <div class="col col-lg-5 my-auto text-right text-nowrap">
-                        <div class="main-menu__left">
-                            <a href="" class="main-menu__link link link--active">Home</a>
-                            <a href="" class="main-menu__link link">Director</a>
-                            <a href="" class="main-menu__link link">Films</a>
-                            <a href="" class="main-menu__link link">Blog</a>
+                        <div class="app-main-menu__left">
+                            <a href="" class="app-main-menu__link app-link app-link--active">Home</a>
+                            <a href="" class="app-main-menu__link app-link">Director</a>
+                            <a href="" class="app-main-menu__link app-link">Films</a>
+                            <a href="" class="app-main-menu__link app-link">Blog</a>
                         </div>
                     </div>
 
                     <div class="col col-lg-2 my-auto">
-                        <a href=""><img src="img/logo.png" alt="" class="main-menu__logo"></a>
+                        <h1 class="mt-0 mb-0">
+                            <a href=""><img src="img/logo.png" alt="Logo"  class="app-main-menu__logo"></a>
+                            <span class="d-none">Tiêu đề SEO ở đây</span>
+                        </h1>
                     </div>
                     
                     <div class="col col-lg-5 my-auto text-nowrap">
-                        <div class="main-menu__right">
-                            <a href="" class="main-menu__link link">Gallery</a>
-                            <a href="" class="main-menu__link link">Blog</a>
-                            <a href="" class="main-menu__link link">Contact</a>
+                        <div class="app-main-menu__right">
+                            <a href="" class="app-main-menu__link app-link">Gallery</a>
+                            <a href="" class="app-main-menu__link app-link">Blog</a>
+                            <a href="" class="app-main-menu__link app-link">Contact</a>
                             
-                            <span class="main-menu__link">
-                                <form method="GET" class="menu-search menu-search--desktop">
-                                    <input type="text" name="s" placeholder="What are you looking for?" class="menu-search__input">
-                                    <button type="submit" class="menu-search__button">
-                                        <i class="fa fa-search"></i>
+                            <div class="app-main-menu__link">
+                                <form method="GET" class="app-menu-search app-menu-search--desktop">
+                                    <input type="text" name="s" placeholder="What are you looking for?" class="app-menu-search__input">
+                                    <button type="submit" class="app-menu-search__button">
+                                        <i class="icon icon-search"></i>
                                     </button>
                                 </form>
-                            </span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -124,21 +130,21 @@
         </div>
     </header>
 
-    <nav id="mobile-menu" class="mobile-menu mobile-menu--hidden">
-        <div class="mobile-menu__head">
-            <div class="mobile-menu__logo">
-                <a href=""><img src="img/logo-white.png" alt="Logo"></a>
+    <nav id="mobile-menu" class="app-mobile-menu app-mobile-menu--hidden">
+        <div class="app-mobile-menu__head">
+            <div class="app-mobile-menu__logo">
+                <a href=""><img src="img/logo-white.png" alt="Logo White" ></a>
             </div>
 
-            <form method="GET" class="menu-search">
-                <input type="text" name="s" class="menu-search__input" placeholder="What are you looking for?">
-                <button type="submit" class="menu-search__button">
-                    <i class="fa fa-search"></i>
+            <form method="GET" class="app-menu-search">
+                <input type="text" name="s" class="app-menu-search__input" placeholder="What are you looking for?">
+                <button type="submit" class="app-menu-search__button">
+                    <i class="icon icon-search"></i>
                 </button>
             </form>
         </div>
 
-        <ul class="mobile-menu__nav">
+        <ul class="app-mobile-menu__nav">
             <li><a href="">Home</a></li>
             <li><a href="">Director</a></li>
             <li><a href="">Films</a></li>
@@ -148,9 +154,9 @@
             <li><a href="">Contact</a></li>
         </ul>
 
-        <div class="mobile-menu__foot">
-            <div class="mobile-menu__close">
-                <svg id="close-menu" class="close-svg" x="0px" y="0px" viewBox="0 -3 170 172" enable-background="new 0 -3 170 172" xml:space="preserve">
+        <div class="app-mobile-menu__foot">
+            <div class="app-mobile-menu__close">
+                <svg id="close-menu" class="app-close-svg" x="0px" y="0px" viewBox="0 -3 170 172" enable-background="new 0 -3 170 172" xml:space="preserve">
                     <path id="ellipse" fill="none" stroke-miterlimit="10" d="M85.396,3.477c44.182,0,80,35.817,80,80
                     c0,44.182-35.818,80-80,80c-44.183,0-80-35.817-80-80C5.396,39.294,41.213,3.477,85.396,3.477z"/>
                     <line fill="none" id="close-line1" stroke-linecap="round" stroke-miterlimit="10" x1="56.5" y1="52.499" x2="115.93" y2="111.929"/>
@@ -160,51 +166,49 @@
         </div>
     </nav>
 
-    <button id="open-menu" class="mobile-menu-toggle">
-        <i class="fa fa-chevron-down"></i>
+    <button id="open-menu" class="app-mobile-menu-toggle">
+        <i class="icon icon-menu"></i>
     </button>
 
     <main>
-        <section id="home-about" class="inview-animate home-about">
-            <div class="container">
-        
+        <section id="home-about" class="app-home-about">
+            <div class="container">    
                 <div class="row">
                     <div class="col-12 col-lg-6">
-                        <div class="home-about__left">
-                            <div class="home-about__image-wrapper">                     
-                                <div class="home-about__overlay"></div> 
-                                <img src="img/about.jpg" alt="about" class="home-about__image">
+                        <div class="app-home-about__left">
+                            <div class="app-home-about__image-wrapper" id="home-about-image-wrapper">
+                                <img src="img/about.jpg" alt="About"  class="app-home-about__image">
                             </div>
 
-                            <div class="home-about__underlay"></div>
+                            <div class="app-home-about__underlay"></div>
                         </div>
                     </div>
 
                     <div class="col-12 col-lg-6">
-                        <div class="home-about__right h-100 d-table">
+                        <div class="app-home-about__right inview-animate h-100 d-table">
                             <div class="d-table-cell">
-                                <h2 class="home-about__heading">The Most Talented Young Actress in America</h2>
+                                <h2 class="app-home-about__heading">The Most Talented Young Actress in America</h2>
                                 
-                                <p class="home-about__intro">
+                                <p class="app-home-about__intro">
                                     Nullam imperdiet, sem at fringilla lobortis, sem nibh fringilla nibh, id gravida mi purus sit amet erat. Ut dictum nisi massa, vitae pulvinar metus scelerisque in. Gravida mi purus sit amet erat. Ut dictum nisi massa, vitae pulvinar metus scelerisque in. 
                                     <br><br>
                                     Nullam imperdiet, sem at fringilla lobortis, sem nibh fringilla nibh, id gravida mi purus sit amet erat. scelerisque in. lasem nibh fringilla nibh.
                                 </p>
 
-                                <div class="home-about__milestones">
-                                    <div class="milestone">
-                                        <div class="milestone__number">1998</div>
-                                        <h3 class="milestone__label">First Starring<br> Film Role</h3>
+                                <div class="app-home-about__milestones">
+                                    <div class="app-milestone">
+                                        <div class="app-milestone__number">1998</div>
+                                        <h3 class="app-milestone__label">First Starring<br> Film Role</h3>
                                     </div>
 
-                                    <div class="milestone">
-                                        <div class="milestone__number">215</div>
-                                        <h3 class="milestone__label">Awards<br> and Nominations</h3>
+                                    <div class="app-milestone">
+                                        <div class="app-milestone__number">215</div>
+                                        <h3 class="app-milestone__label">Awards<br> and Nominations</h3>
                                     </div>
 
-                                    <div class="milestone">
-                                        <div class="milestone__number">17</div>
-                                        <h3 class="milestone__label">Feature films<br> to date</h3>
+                                    <div class="app-milestone">
+                                        <div class="app-milestone__number">17</div>
+                                        <h3 class="app-milestone__label">Feature films<br> to date</h3>
                                     </div>
                                 </div>
                             </div>
@@ -214,24 +218,29 @@
             </div>
         </section>
 
-        <section id="home-quote" class="home-quote inview-animate">
+        <section id="home-quote" class="app-home-quote inview-animate">
             <div class="container position-relative">
-                <div class="home-quote__container">
-                    <div class="home-quote__image"><img src="img/quote-author.png" alt="quote-author" class="rounded-circle"></div>
+                <div class="app-home-quote__container">
+                    <div class="app-home-quote__image">
+                        <img src="img/quote-author.png" alt="Quote Author"  class="rounded-circle">
+                    </div>
 
-                    <p class="home-quote__content">I think it's important people <strong>see themselves in film</strong>, but it’s even more important they <strong>see people they maybe don't know as well</strong></p>
-                    <div class="home-quote__author">BRYAN FREEMAN</div>
-                    <small class="home-quote__author-position">Partner / Director</small>
+                    <p class="app-home-quote__content">
+                        I think it's important people <strong>see themselves in film</strong>, but it’s even more important they <strong>see people they maybe don't know as well</strong>
+                    </p>
+
+                    <h3 class="app-home-quote__author">BRYAN FREEMAN</h3>
+                    <small class="app-home-quote__author-position">Partner / Director</small>
                 </div>
             </div>
         </section>
 
-        <section id="home-video" class="home-video">
-            <div class="home-video__overlay"></div>
+        <div id="home-video" class="inview-animate app-home-video">
+            <div class="app-home-video__overlay"></div>
 
-            <div class="home-video__item">
+            <div class="app-home-video__item">
                 
-                <div class="home-video__embed embed-responsive embed-responsive-16by9">
+                <div class="app-home-video__embed embed-responsive embed-responsive-16by9">
                     <video 
                         id="home-intro-video" 
                         controls
@@ -241,62 +250,62 @@
                     </video>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section id="home-featured-films" class="home-featured-films section inview-animate">
+        <section id="home-featured-films" class="app-home-featured-films section inview-animate">
             <div class="container">
-                <h2 class="section__title"><a href="" class="link">My featured films</a></h2>
-                <em class="section__subtitle text-uppercase">We will develop your film, your talent</em>
+                <h2 class="app-section__title"><a href="" class="app-link app-link--no-bd">My featured films</a></h2>
+                <em class="app-section__subtitle text-uppercase">We will develop your film, your talent</em>
             
-                <div class="section__content">
+                <div class="app-section__content">
                     
                     <div class="row">
                         <!-- LOOP -->
                         <div class="col-12 col-md-6 col-lg-4">
-                            <div class="home-featured-film">
-                                <div class="home-featured-film__preview"><img src="img/film.jpg" alt="film"></div>
-                                <h3 class="home-featured-film__name"><a href="" class="link">Seventeenth Summer</a></h3>
-                                <a href="#" class="home-featured-film__genre">Music Video</a>
+                            <div class="app-home-featured-film">
+                                <a href="" target="_blank" class="app-home-featured-film__preview"><img src="img/film.jpg" alt="Film" ></a>
+                                <h3 class="app-home-featured-film__name"><a href="" class="app-link">Seventeenth Summer</a></h3>
+                                <a href="#" class="app-home-featured-film__genre">Music Video</a>
                             </div>      
                         </div>
 
                         <div class="col-12 col-md-6 col-lg-4">
-                            <div class="home-featured-film">
-                                <div class="home-featured-film__preview"><img src="img/film.jpg" alt="film"></div>
-                                <h3 class="home-featured-film__name"><a href="" class="link">Seventeenth Summer</a></h3>
-                                <a href="#" class="home-featured-film__genre">Music Video</a>
+                            <div class="app-home-featured-film">
+                                <a href="" target="_blank" class="app-home-featured-film__preview"><img src="img/film.jpg" alt="Film" ></a>
+                                <h3 class="app-home-featured-film__name"><a href="" class="app-link">Seventeenth Summer</a></h3>
+                                <a href="#" class="app-home-featured-film__genre">Music Video</a>
                             </div>      
                         </div>
 
                         <div class="col-12 col-md-6 col-lg-4">
-                            <div class="home-featured-film">
-                                <div class="home-featured-film__preview"><img src="img/film.jpg" alt="film"></div>
-                                <h3 class="home-featured-film__name"><a href="" class="link">Seventeenth Summer</a></h3>
-                                <a href="#" class="home-featured-film__genre">Music Video</a>
+                            <div class="app-home-featured-film">
+                                <a href="" target="_blank" class="app-home-featured-film__preview"><img src="img/film.jpg" alt="Film" ></a>
+                                <h3 class="app-home-featured-film__name"><a href="" class="app-link">Seventeenth Summer</a></h3>
+                                <a href="#" class="app-home-featured-film__genre">Music Video</a>
                             </div>      
                         </div>
 
                         <div class="col-12 col-md-6 col-lg-4">
-                            <div class="home-featured-film">
-                                <div class="home-featured-film__preview"><img src="img/film.jpg" alt="film"></div>
-                                <h3 class="home-featured-film__name"><a href="" class="link">Seventeenth Summer</a></h3>
-                                <a href="#" class="home-featured-film__genre">Music Video</a>
+                            <div class="app-home-featured-film">
+                                <a href="" target="_blank" class="app-home-featured-film__preview"><img src="img/film.jpg" alt="Film" ></a>
+                                <h3 class="app-home-featured-film__name"><a href="" class="app-link">Seventeenth Summer</a></h3>
+                                <a href="#" class="app-home-featured-film__genre">Music Video</a>
                             </div>      
                         </div>
 
                         <div class="col-12 col-md-6 col-lg-4">
-                            <div class="home-featured-film">
-                                <div class="home-featured-film__preview"><img src="img/film.jpg" alt="film"></div>
-                                <h3 class="home-featured-film__name"><a href="" class="link">Seventeenth Summer</a></h3>
-                                <a href="#" class="home-featured-film__genre">Music Video</a>
+                            <div class="app-home-featured-film">
+                                <a href="" target="_blank" class="app-home-featured-film__preview"><img src="img/film.jpg" alt="Film" ></a>
+                                <h3 class="app-home-featured-film__name"><a href="" class="app-link">Seventeenth Summer</a></h3>
+                                <a href="#" class="app-home-featured-film__genre">Music Video</a>
                             </div>      
                         </div>
 
                         <div class="col-12 col-md-6 col-lg-4">
-                            <div class="home-featured-film">
-                                <div class="home-featured-film__preview"><img src="img/film.jpg" alt="film"></div>
-                                <h3 class="home-featured-film__name"><a href="" class="link">Seventeenth Summer</a></h3>
-                                <a href="#" class="home-featured-film__genre">Music Video</a>
+                            <div class="app-home-featured-film">
+                                <a href="" target="_blank" class="app-home-featured-film__preview"><img src="img/film.jpg" alt="Film" ></a>
+                                <h3 class="app-home-featured-film__name"><a href="" class="app-link">Seventeenth Summer</a></h3>
+                                <a href="#" class="app-home-featured-film__genre">Music Video</a>
                             </div>      
                         </div>
                         <!-- END LOOP -->
@@ -306,159 +315,158 @@
             </div>
         </section>
 
-        <section id="home-cta" class="home-cta inview-animate">
-            <div class="container">
+        <section id="home-cta" class="app-home-cta">
+            <div class="container inview-animate">
                 <div class="row">
                     <div class="col-12 col-md-7 text-center">
-                        <h2 class="home-cta__text">Let's make great things together!</h2>
+                        <h2 class="app-home-cta__text">Let's make great things together!</h2>
                     </div>
-                    <div class="col-12 col-md-5 home-cta__buttons">
-                        <a href="" class="home-cta__button btn btn-primary btn--rounded btn-primary--inverse">View More</a>
-                        <a href="" class="home-cta__button btn btn-primary btn--rounded">Hire Us Now</a>
+                    <div class="col-12 col-md-5 app-home-cta__buttons">
+                        <a href="" class="app-home-cta__button btn btn-primary btn--rounded btn-primary--inverse">View More</a>
+                        <a href="" class="app-home-cta__button btn btn-primary btn--rounded">Hire Us Now</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="home-social-follow" class="section home-social-follow inview-animate">
+        <section id="home-social-follow" class="app-section app-home-social-follow inview-animate">
             <div class="container">
                 
-                <h2 class="section__title home-social-follow__title">Follow me on instagram</h2>
-                <em class="section__subtitle">@Cornelia_Lewis</em>
+                <h2 class="app-section__title app-home-social-follow__title">Follow me on instagram</h2>
+                <em class="app-section__subtitle">@Cornelia_Lewis</em>
 
-                <div class="section__content">
+                <div class="app-section__content">
                     
                     <div class="row gutter-10">
 
-                        <div class="col-6 col-md-3 home-social-follow__col">
-                            <div class="home-social-follow__item">
-                                <a href="" class="home-social-follow__inner">
-                                    <img src="img/intro.jpg" alt="intro" class="home-social-follow__image">
-                                    <span class="social-overlay">
-                                        <span class="social-overlay__content">
-                                            <img src="img/instagram-icon.png" alt="instagram-icon">
-                                            <span class="social-overlay__instagram-url">@Cornelia_Lewis</span>
+                        <div class="col-6 col-md-3 app-home-social-follow__col">
+                            <div class="app-home-social-follow__item">
+                                <a href="" class="app-home-social-follow__inner">
+                                    <img src="img/intro.jpg" alt="Intro"  class="app-home-social-follow__image">
+                                    <span class="app-social-overlay">
+                                        <span class="app-social-overlay__content">
+                                            <span class="icon-instagram-home"></span>
+                                            <span class="app-social-overlay__instagram-url">@Cornelia_Lewis</span>
                                         </span>
                                     </span>
                                 </a>  
                             </div>
                         </div>
 
-                        <div class="col-6 col-md-3 home-social-follow__col">
-                            <div class="home-social-follow__item">
-                                <a href="" class="home-social-follow__inner">
-                                    <img src="img/instagram-photo.jpg" alt="instagram-photo" class="home-social-follow__image">
-                                    <span class="social-overlay">
-                                        <span class="social-overlay__content">
-                                            <img src="img/instagram-icon.png" alt="instagram-icon">
-                                            <span class="social-overlay__instagram-url">@Cornelia_Lewis</span>
+                        <div class="col-6 col-md-3 app-home-social-follow__col">
+                            <div class="app-home-social-follow__item">
+                                <a href="" class="app-home-social-follow__inner">
+                                    <img src="img/instagram-photo.jpg" alt="Instagram Photo"  class="app-home-social-follow__image">
+                                    <span class="app-social-overlay">
+                                        <span class="app-social-overlay__content">
+                                            <span class="icon-instagram-home"></span>
+                                            <span class="app-social-overlay__instagram-url">@Cornelia_Lewis</span>
                                         </span>
                                     </span>
                                 </a>  
                             </div>
                         </div>
 
-                        <div class="col-6 col-md-3 home-social-follow__col">
-                            <div class="home-social-follow__item">
-                                <a href="" class="home-social-follow__inner">
-                                    <img src="img/instagram-photo.jpg" alt="instagram-photo" class="home-social-follow__image">
-                                    <span class="social-overlay">
-                                        <span class="social-overlay__content">
-                                            <img src="img/instagram-icon.png" alt="instagram-icon">
-                                            <span class="social-overlay__instagram-url">@Cornelia_Lewis</span>
+                        <div class="col-6 col-md-3 app-home-social-follow__col">
+                            <div class="app-home-social-follow__item">
+                                <a href="" class="app-home-social-follow__inner">
+                                    <img src="img/instagram-photo.jpg" alt="Instagram Photo"  class="app-home-social-follow__image">
+                                    <span class="app-social-overlay">
+                                        <span class="app-social-overlay__content">
+                                            <span class="icon-instagram-home"></span>
+                                            <span class="app-social-overlay__instagram-url">@Cornelia_Lewis</span>
                                         </span>
                                     </span>
                                 </a>  
                             </div>
                         </div>
 
-                        <div class="col-6 col-md-3 home-social-follow__col">
-                            <div class="home-social-follow__item">
-                                <a href="" class="home-social-follow__inner">
-                                    <img src="img/instagram-photo-2.jpg" alt="instagram-photo-2" class="home-social-follow__image">
-                                    <span class="social-overlay">
-                                        <span class="social-overlay__content">
-                                            <img src="img/instagram-icon.png" alt="instagram-icon">
-                                            <span class="social-overlay__instagram-url">@Cornelia_Lewis</span>
+                        <div class="col-6 col-md-3 app-home-social-follow__col">
+                            <div class="app-home-social-follow__item">
+                                <a href="" class="app-home-social-follow__inner">
+                                    <img src="img/instagram-photo-2.jpg" alt="Instagram Photo 2"  class="app-home-social-follow__image">
+                                    <span class="app-social-overlay">
+                                        <span class="app-social-overlay__content">
+                                            <span class="icon-instagram-home"></span>
+                                            <span class="app-social-overlay__instagram-url">@Cornelia_Lewis</span>
                                         </span>
                                     </span>
                                 </a>  
                             </div>
                         </div>
 
-                        <div class="col-6 col-md-3 home-social-follow__col">
-                            <div class="home-social-follow__item">
-                                <a href="" class="home-social-follow__inner">
-                                    <img src="img/instagram-photo-2.jpg" alt="instagram-photo-2" class="home-social-follow__image">
-                                    <span class="social-overlay">
-                                        <span class="social-overlay__content">
-                                            <img src="img/instagram-icon.png" alt="instagram-icon">
-                                            <span class="social-overlay__instagram-url">@Cornelia_Lewis</span>
+                        <div class="col-6 col-md-3 app-home-social-follow__col">
+                            <div class="app-home-social-follow__item">
+                                <a href="" class="app-home-social-follow__inner">
+                                    <img src="img/instagram-photo-2.jpg" alt="Instagram Photo 2"  class="app-home-social-follow__image">
+                                    <span class="app-social-overlay">
+                                        <span class="app-social-overlay__content">
+                                            <span class="icon-instagram-home"></span>
+                                            <span class="app-social-overlay__instagram-url">@Cornelia_Lewis</span>
                                         </span>
                                     </span>
                                 </a>  
                             </div>
                         </div>
 
-                        <div class="col-6 col-md-3 home-social-follow__col">
-                            <div class="home-social-follow__item">
-                                <a href="" class="home-social-follow__inner">
-                                    <img src="img/instagram-photo-2.jpg" alt="instagram-photo-2" class="home-social-follow__image">
-                                    <span class="social-overlay">
-                                        <span class="social-overlay__content">
-                                            <img src="img/instagram-icon.png" alt="instagram-icon">
-                                            <span class="social-overlay__instagram-url">@Cornelia_Lewis</span>
+                        <div class="col-6 col-md-3 app-home-social-follow__col">
+                            <div class="app-home-social-follow__item">
+                                <a href="" class="app-home-social-follow__inner">
+                                    <img src="img/instagram-photo-2.jpg" alt="Instagram Photo 2"  class="app-home-social-follow__image">
+                                    <span class="app-social-overlay">
+                                        <span class="app-social-overlay__content">
+                                            <span class="icon-instagram-home"></span>
+                                            <span class="app-social-overlay__instagram-url">@Cornelia_Lewis</span>
                                         </span>
                                     </span>
                                 </a>  
                             </div>
                         </div>
 
-                        <div class="col-6 col-md-3 home-social-follow__col">
-                            <div class="home-social-follow__item">
-                                <a href="" class="home-social-follow__inner">
-                                    <img src="img/instagram-photo-2.jpg" alt="instagram-photo-2" class="home-social-follow__image">
-                                    <span class="social-overlay">
-                                        <span class="social-overlay__content">
-                                            <img src="img/instagram-icon.png" alt="instagram-icon">
-                                            <span class="social-overlay__instagram-url">@Cornelia_Lewis</span>
+                        <div class="col-6 col-md-3 app-home-social-follow__col">
+                            <div class="app-home-social-follow__item">
+                                <a href="" class="app-home-social-follow__inner">
+                                    <img src="img/instagram-photo-2.jpg" alt="Instagram Photo 2"  class="app-home-social-follow__image">
+                                    <span class="app-social-overlay">
+                                        <span class="app-social-overlay__content">
+                                            <span class="icon-instagram-home"></span>
+                                            <span class="app-social-overlay__instagram-url">@Cornelia_Lewis</span>
                                         </span>
                                     </span>
                                 </a>  
                             </div>
                         </div>
                     </div>
-
                     
-                    <div class="section__outside-text">INSTAGRAM</div>
-                    <div class="section__outside-text section__outside-text--right">@Cornelia Lewis</div>
+                    <div class="app-section__outside-text">INSTAGRAM</div>
+                    <div class="app-section__outside-text app-section__outside-text--right">@Cornelia Lewis</div>
 
                 </div>
 
             </div>
         </section>
 
-        <section id="home-contact" class="home-contact inview-animate">
-            <div class="container home-contact__container">
+        <section id="home-contact" class="app-home-contact inview-animate">
+            <div class="container app-home-contact__container">
                 <div class="row">
                     <div class="col-12 col-md-5">
-                        <div class="home-contact__image-box pull-right clearfix">
-                            <img src="img/home-contact.jpg" alt="home-contact" class="home-contact__image">
+                        <div class="app-home-contact__image-box text-right">
+                            <img src="img/home-contact.jpg" alt="Home Contact"  class="app-home-contact__image">
                         </div>  
                     </div>
 
                     <div class="col-12 col-md-7">
-                        <div class="home-contact__content">
-                            <div class="home-contact__content-inner">
-                                <p class="home-contact__text">Have a new project? Send me message at</p>
-                                <h2 class="home-contact__email">lornelia_lewis@gmail.com</h2>
+                        <div class="app-home-contact__content">
+                            <div class="app-home-contact__content-inner">
+                                <p class="app-home-contact__text">Have a new project? Send me message at</p>
+                                <h2 class="app-home-contact__email">lornelia_lewis@gmail.com</h2>
                             
-                                <div class="home-contact__buttons">
-                                    <a href="" class="social-button"><i class="fa fa-facebook"></i></a>
-                                    <a href="" class="social-button"><i class="fa fa-twitter"></i></a>
-                                    <a href="" class="social-button"><i class="fa fa-instagram"></i></a>
-                                    <a href="" class="social-button"><i class="fa fa-youtube-play"></i></a>
-                                    <a href="" class="social-button"><i class="fa fa-vimeo"></i></a>
+                                <div class="app-home-contact__buttons">
+                                    <a href="" class="app-social-button"><i class="icon-facebook"></i></a>
+                                    <a href="" class="app-social-button"><i class="icon-twitter"></i></a>
+                                    <a href="" class="app-social-button"><i class="icon-instagram"></i></a>
+                                    <a href="" class="app-social-button"><i class="icon-youtube"></i></a>
+                                    <a href="" class="app-social-button"><i class="icon-vimeo"></i></a>
                                 </div>
                             </div>
                         </div>  
@@ -468,29 +476,26 @@
         </section>
     </main>
 
-    <footer class="footer">
+    <footer class="app-footer">
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-6">
-                    <small class="footer__copyright">Copyright &copy; 2017 <em><a href="" class="link">Circlestudio</a></em> - All Rights Reserved
+                    <small class="app-footer__copyright">Copyright &copy; 2017 <em><a href="" class="app-link">Circlestudio</a></em> - All Rights Reserved
                     </small>
                 </div>
                 <div class="col-12 col-md-6">
-                    <div class="footer__nav">
-                        <a href="" class="footer__link link">CONTACT DETAIL</a>
-                        <a href="" class="footer__link link">CLIENTS</a>
-                        <a href="" class="footer__link link">SERVICES</a>
+                    <div class="app-footer__nav">
+                        <a href="" class="app-footer__link app-link">CONTACT DETAIL</a>
+                        <a href="" class="app-footer__link app-link">CLIENTS</a>
+                        <a href="" class="app-footer__link app-link">SERVICES</a>
                     </div>
                 </div>
             </div>
-            
         </div>
     </footer>
 
     <script src="js/TweenMax.min.js"></script>
-
     <script src="js/three.min.js"></script>
-    
     <script id="vertexShader" type="x-shader/x-vertex">
         varying vec2 vUV;
         uniform vec2 ratio_fixing_factor;
@@ -524,7 +529,6 @@
             gl_Position = vec4( pos, 1.0 );
         }
     </script>
-
     <script id="fragmentShader" type="x-shader/x-fragment">
         uniform float u_time;
         uniform float slide_progress;
@@ -599,13 +603,13 @@
 
         }
     </script>
-
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/jquery.waypoints.min.js"></script>
     <script src="js/shortcuts/inview.min.js"></script> <!-- Waypoint's plugin -->
-    <script src="js/video.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/6.2.5/video.min.js"></script>
     <script src="js/videojs.youtube-plugin.min.js"></script>
-    <script src="js/trung-3d-slider.js"></script>
+    <script src="js/3d-slider.min.js"></script>
+    <script src="js/3d-transition.min.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
