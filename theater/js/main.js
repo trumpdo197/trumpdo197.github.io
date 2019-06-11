@@ -94,10 +94,6 @@
     }
 
 /* ==========================================================================
-   End Utilities
-   ========================================================================== */
-
-/* ==========================================================================
    Main functions
    ========================================================================== */
 
@@ -107,15 +103,16 @@
 
             // Chỉ chạy khi ở trang chủ.
             if ($('#home').length < 1) return;
-            this.initHomeVideo();
-            this.initOnScrollHomeAbout();
-            this.initOnScrollHomeQuote();
-            this.initOnScrollHomeVideo();
-            this.initOnScrollHomeFeaturedFilms();
-            this.initOnScrollHomeCta();
-            this.initOnScrollHomeSocialFollow();
-            this.initOnScrollHomeContact();
-            this.initHomeSlider();
+
+            // this.initHomeVideo();
+            // this.initOnScrollHomeAbout();
+            // this.initOnScrollHomeQuote();
+            // this.initOnScrollHomeVideo();
+            // this.initOnScrollHomeFeaturedFilms();
+            // this.initOnScrollHomeCta();
+            // this.initOnScrollHomeSocialFollow();
+            // this.initOnScrollHomeContact();
+            // this.initHomeSlider();
         }
         initInview(query, callback, cbType = 'enter'){
             if (typeof callback != 'function') {
@@ -246,7 +243,7 @@
             })
         }
         initOnScrollHomeAbout() {
-            let shit = new SimpleTransition('home-about-image-wrapper');
+            let stObj = new SimpleTransition('home-about-image-wrapper');
             // Split text and animate it
             let headingjQueryObj    = $('body').find('.app-home-about__heading');
             let text                = headingjQueryObj.text();
@@ -261,19 +258,18 @@
             let wordsAndLettersDOM  = AppUtils.generateDOMWordAndLetters(text);
             let aniLetters  = AppUtils.appendSplittedTextDOM(headingjQueryObj[0], wordsAndLettersDOM);
 
-            // let aniLetters  = headingjQueryObj.find('.ani-letter');
-
              // Hide all components
             TweenMax.set(milestoneDOMs, {opacity: 0});
 
-            shit.onLoadedImages(() => {
+            stObj.onLoadedImages(() => {
                 this.initInview('#home-about', elem => {
+                    stObj.start();
 
                     let tl = new TimelineMax({
                         repeat: 0,
                     });
 
-                    tl.fromTo(shit.data, 1.2, {
+                    tl.fromTo(stObj.data, 1.2, {
                         progress: 0
                     }, {
                         progress: 1,
@@ -283,10 +279,9 @@
                     tl.addLabel('start');
 
                     tl.call(() => {
-                        shit.destroy();
+                        stObj.destroy();
                     }, null, 'start');
 
-                
                     tl.staggerFromTo( aniLetters, 0.35, {
                         opacity: 0,
                         x: -25,
@@ -340,7 +335,7 @@
                 }, {
                     opacity: 1
                 })
-            });
+            }, 'entered');
         }
         initOnScrollHomeFeaturedFilms(){
             this.initInview('#home-featured-films', function(elem){
@@ -385,51 +380,106 @@
             })
         }
         initOnScrollHomeContact(){
-            this.initInview('#home-contact', function(elem){
-                TweenMax.fromTo(elem, 1.0, {
-                    opacity: 0
-                }, {
-                    opacity: 1
-                })
-            }, 'entered')
+
+            let contentDOM = $('.app-home-contact__content-inner');
+            
+            let tl = new TimelineMax({
+                repeat: 0,
+            });
+
+            tl.set(contentDOM, {
+                opacity: 0
+            })
+
+            let stObj = new SimpleTransition('home-contact-image-wrapper', {
+                position: {
+                    top: '0',
+                    right: '0',
+                    left: 'auto',
+                    bottom: 'auto'
+                }
+            });
+
+            stObj.onLoadedImages(() => {
+                this.initInview('#home-contact', elem => {
+                    stObj.start();
+
+                    tl.fromTo(stObj.data, 1.2, {
+                        progress: 0
+                    }, {
+                        progress: 1,
+                        ease: Power4.easeOut
+                    });
+
+                    tl.addLabel('start');
+
+                    tl.call(() => {
+                        stObj.destroy();
+                    }, null, 'start');
+
+                    tl.to(contentDOM, 1.0, {
+                        opacity: 1
+                    })
+                }, 'entered');
+            });
         }
+    }
+
+/* ==========================================================================
+   Khởi tạo app
+   ========================================================================== */
+    
+    let showContent = () => {
+        const app = new MainApp();
+        app.initOnScrollHomeAbout();
+        app.initOnScrollHomeQuote();
+        app.initOnScrollHomeVideo();  
+        app.initHomeVideo();
+        app.initOnScrollHomeFeaturedFilms();
+        app.initOnScrollHomeCta();
+        app.initOnScrollHomeSocialFollow();
+        app.initOnScrollHomeContact();
+
+        let preloader = $('.preloader');
+        let body = $('body');
+   
+        TweenMax.fromTo(preloader, 1 , {
+            opacity: 1
+        }, {
+            opacity: 0,
+            delay: 0.5, // Delay để CPU nghỉ ngơi
+            onComplete: () => {
+                preloader.remove();
+                body.removeClass('overflow-hidden');
+                
+                setTimeout(()=>{
+                    app.initHomeSlider();
+                }, 500)
+            }
+        })
     }
 
     const appConfigs = {
-        preloaderDuration: 2000, // Chỉnh khớp với thời gian trong css!
+        preloaderDuration: 2000, // Phải chỉnh khớp với thời gian animation trong css!
     }
 
-    let appState = {
+    const appState = {
         isAnimationFinished: false,
         isWindowLoaded: false
     }
-
-    setTimeout(function(){
+   
+    let timeout = setTimeout(function(){
         appState.isAnimationFinished = true;
         if (appState.isWindowLoaded === true) {
-            runApp();
+            showContent();
         }
-    }, appConfigs.preloaderDuration + 500);
+        clearTimeout(timeout);
+    }, appConfigs.preloaderDuration);
 
     window.addEventListener('load', function(){
         appState.isWindowLoaded = true;
         if (appState.isAnimationFinished === true) {
-            runApp();
+            showContent();
         }
     })
-
-    function runApp(){
-        let preloader = $('.preloader');
-        let body = $('body');
-
-        TweenMax.fromTo(preloader, 0.5 , {
-            opacity: 1
-        }, {
-            opacity: 0,
-            onComplete: function(){
-                preloader.remove();
-                body.removeClass('overflow-hidden');
-                new MainApp();
-            }
-        })
-    }
+    
