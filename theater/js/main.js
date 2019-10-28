@@ -103,16 +103,6 @@
 
             // Chỉ chạy khi ở trang chủ.
             if ($('#home').length < 1) return;
-
-            // this.initHomeVideo();
-            // this.initOnScrollHomeAbout();
-            // this.initOnScrollHomeQuote();
-            // this.initOnScrollHomeVideo();
-            // this.initOnScrollHomeFeaturedFilms();
-            // this.initOnScrollHomeCta();
-            // this.initOnScrollHomeSocialFollow();
-            // this.initOnScrollHomeContact();
-            // this.initHomeSlider();
         }
         initInview(query, callback, cbType = 'enter'){
             if (typeof callback != 'function') {
