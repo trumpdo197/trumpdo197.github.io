@@ -1,9 +1,8 @@
 {
-  "main.css": "/styles/0.8c85660c.css",
-  "main.js": "/scripts/main.27f18077.js",
+  "main.css": "/styles/0.d0e39406.css",
+  "main.js": "/scripts/main.5e441747.js",
   "runtime.js": "/scripts/runtime.5892a5d2.js",
-  "vendors~main.js": "/scripts/vendors~main.e772140e.js",
-  "../stats.json": "/../stats.json",
+  "vendors~main.js": "/scripts/vendors~main.1fe792c1.js",
   "images/Screen2-11.png": "/images/Screen2-11.71fc1fd2.png",
   "images/Screen2-12.png": "/images/Screen2-12.66a378d2.png",
   "images/Screen2-13.png": "/images/Screen2-13.437dd6ce.png",
@@ -14,6 +13,5 @@
   "images/example-logo-2.png": "/images/example-logo-2.00be7fa7.png",
   "images/hooman-head.png": "/images/hooman-head.3a138117.png",
   "images/whybepos-1.png": "/images/whybepos-1.13c28cda.png",
-  "index.html": "/index.html",
-  "videos/bepos.mp4": "/videos/bepos.mp4"
+  "index.html": "/index.html"
 }
