@@ -13,10 +13,10 @@ const audio = {
 
 // general settings
 let gameState = "start";
-const gravity = 0.3;
-const speed = 3.5;
+const gravity = 0.6;
+const speed = 7.5;
 const sizes = [51, 36];
-const jump = -7.5;
+const jump = -8.5;
 const cTenth = canvas.width / 10;
 
 let index = 0,
@@ -29,7 +29,7 @@ let index = 0,
 
 // pipe settings
 const pipeWidth = 78;
-const pipeGap = 320;
+const pipeGap = 260;
 const pipeLoc = () =>
   Math.random() * (canvas.height - (pipeGap + pipeWidth) - pipeWidth) +
   pipeWidth;
