@@ -240,6 +240,11 @@ imageSprites.onload = render;
 
 // start game
 document.addEventListener("click", handleGameClick);
+document.addEventListener("keydown", (e) => {
+  if (e.code === 'Space') {
+    handleGameClick();
+  }
+});
 
 /**
  * UTILS
