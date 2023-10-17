@@ -172,9 +172,14 @@ const drawGameStateStart = () => {
   ctx.fillText("Chơi đê", 145, 535);
 };
 
-const render = () => {
+let lastTime = 0;
+
+const render = (time) => {
+  console.log(time);
+
   // make the pipe and bird moving
-  index++;
+  index = (time - lastTime) / 10000;
+  lastTime = time;
 
   // ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -241,7 +246,7 @@ imageSprites.onload = render;
 // start game
 document.addEventListener("click", handleGameClick);
 document.addEventListener("keydown", (e) => {
-  if (e.code === 'Space') {
+  if (e.code === "Space") {
     handleGameClick();
   }
 });
