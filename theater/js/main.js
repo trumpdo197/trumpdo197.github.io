@@ -433,18 +433,18 @@
         let preloader = $('.preloader');
         let body = $('body');
    
-        TweenMax.fromTo(preloader, 1 , {
+        TweenMax.fromTo(preloader, 0.6 , {
             opacity: 1
         }, {
             opacity: 0,
-            delay: 0.5, // Delay để CPU nghỉ ngơi
+            delay: 0.5,
             onComplete: () => {
                 preloader.remove();
                 body.removeClass('overflow-hidden');
                 
                 setTimeout(()=>{
                     app.initHomeSlider();
-                }, 500)
+                }, 100)
             }
         })
     }
